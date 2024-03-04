@@ -1,32 +1,21 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+class Solution {
+public:
+    int myAtoi(string s) {
+        int result = 0;
+        int sign = 1;
+        int i = 0;
+        while (s[i] == ' ')
+            i++;
+        if (s[i] == '+' || s[i] == '-') {
+            sign = (s[i++] == '-') ? -1 : 1;
+        }
+        while (isdigit(s[i])) {
+            if (result > INT_MAX / 10 || (result == INT_MAX / 10 && s[i] - '0' > INT_MAX % 10)) {
+                return (sign == 1) ? INT_MAX : INT_MIN;
+            }
+            result = result * 10 + (s[i++] - '0');
+        }
+        
+        return result * sign;
+    }
+};
